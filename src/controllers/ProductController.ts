@@ -8,6 +8,7 @@ export class ProductController{
     createProduct = async(req: Request, res: Response, next: NextFunction) =>{
         try {
             const{name, quantity, price} = req.body
+            await this.productService.validateSchema(req.body)
             const newProduct = await this.productService.create(name,quantity, price)
             return res.status(200).json(newProduct)
         } catch (error) {
@@ -36,6 +37,7 @@ export class ProductController{
     updateProduct = async(req: Request, res: Response, next: NextFunction) =>{
         try {
             const productId = Number(req.params.id);
+            await this.productService.validateSchema(req.body,true)
             const product = await this.productService.update(productId, req.body);
             return res.status(200).json(product);
         } catch (error) {
