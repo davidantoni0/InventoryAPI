@@ -43,6 +43,6 @@ export class ProductService{
         }
         this.productRepository.merge(product, data);
         await validate(product)
-        return await this.productRepository.save(product!);
+        return await this.productRepository.save(product);
     }
 }
